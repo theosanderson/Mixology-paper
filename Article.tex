@@ -1,0 +1,121 @@
+\documentclass[times, twoside, watermark]{zHenriquesLab-StyleBioRxiv}
+\usepackage{blindtext}
+
+% Please give the surname of the lead author for the running footer
+\leadauthor{Henriques} 
+\usepackage[per-mode=symbol]{siunitx}
+\DeclareSIUnit\molar{\mole\per\cubic\deci\metre}
+\DeclareSIUnit\Molar{\textsc{m}}
+\begin{document}
+
+\noindent%
+
+\title{Mixology: a tool for calculating required amounts for solutions}
+\shorttitle{My Template}
+
+% Use letters for affiliations, numbers to show equal authorship (if applicable) and to indicate the corresponding author
+\author[1,\Letter]{Theo Sanderson}
+
+\affil[1]{Francis Crick Institute, London}
+
+\maketitle
+
+%TC:break Abstract
+%the command above serves to have a word count for the abstract
+\begin{abstract}
+Mixology is a simple tool to simplify the calculations needed to calculate the amount of each ingredient needed for a custom solution. It can convert between all sorts of volumetric, mass and concentration units. This includes the ability to convert between molarities and mass-based concentrations, using molecular masses retrieved from the ChEBI database. Rather than explicitly taking the form of a `calculator', Mixology aims to provide an interface where the user merely lists the ingredients of their desired solution, and the stocks available, with the desired concentrations filled in automatically by in a reactive interface. Mixology can be accessed at \url{http://mixology.science}.
+\end {abstract}
+%TC:break main
+%the command above serves to have a word count for the abstract
+
+\begin{keywords}
+bla | bla | bla | bla
+\end{keywords}
+
+\begin{corrauthor}
+%\texttt{r.henriques{@}ucl.ac.uk}
+r.henriques\at ucl.ac.uk
+\end{corrauthor}
+
+\section*{Introduction}
+Performing calculations to make up solutions is one of the first skills that a laboratory researcher learns. Despite efforts to facilitate sharing of laboratory protocols \cite{TeytelmanStoliartchouk2015}, solutions are typically described in publications only in terms of the molarities of their constituent parts, meaning that calculations are needed to determine the absolute amounts needed to make up a buffer.  These calculations can be surprisingly lengthy.
+
+Suppose a researcher is implementing a new protocol for the first time, and needs to make a buffer containing, amongst other ingredients, ``\SI[per-mode=symbol]{500}{\ug\per\ml} sodium chloride''. She wants to make up 2 liters of the new buffer. On her bench she happens to already have a stock solution labelled "\SI{1.5}{\Molar} NaCl". What volume of stock solution does she need to add to the new buffer? One system that she might follow to calculate this would be to:
+\begin{enumerate}
+    \item Look up the molar mass of sodium chloride: $$\SI[per-mode=symbol]{58.44}{\g\per\mol}$$
+    \item Convert the desired concentration \SI[per-mode=symbol]{500}{\ug\per\ml} to \si[per-mode=symbol]{\ug\per\liter}: $$\SI[per-mode=symbol]{500}{\ug\per\ml} \times \SI{1000}{\ml\per\liter} = \SI{500000}{\ug\per\liter} $$
+   \item  Convert the desired concentration to \si{\g\per\liter}:  $$ \SI{500000}{\ug\per\liter} \div \SI{1000000}{\ug\per\gram} = \SI{0.5}{\g\per\liter} $$ 
+ \item Convert the desired concentration to \si{\mol\per\liter} (molarity): 
+ $$ \SI{0.5}{\g\per\liter} \div \SI{58.44}{\g\per\mol} = \SI{0.0085}{\Molar} $$ 
+ \item Calculate the ratio of the two concentrations:
+  $$ \SI{0.0085}{\Molar} \div \SI{1.5}{\Molar} = \num{0.0056} $$ 
+ \item Calculate the volume to add:
+ $$ \SI{2}{\liter} \times \num{0.0056} = \SI{0.0112}{\liter} $$ 
+ \item Convert this volume to  \si{\ml} for pipetting:
+  $$ \SI{0.0112}{\liter} \times \SI{1000}{\ml\per\liter} = \SI{11.2}{\ml} $$ 
+\end{enumerate}
+
+
+
+\section*{Usage}
+
+Mixology provides a simple interface. A user first enters final volume of the solution they are making, and a descriptive name. Then they add any number of components to the solution. For each component, they enter a desired final concentration. Concentrations can be entered in any of several unit forms:
+\begin{itemize}
+    \item mass-based:  \si{\g\per\ml}, \si{\ug\per\ml}, \si{\mg\per\l}, \% (w/v), etc.
+    \item molarity-based: \si{\mol\per\l}, nM, \si{\micro\Molar}, mM,  M, etc.
+    \item volume-based: \% (v/v)
+    \item other: units/ml, X, etc.
+\end{itemize}
+
+The user also enters the name of the chemical. Chemical names are autocompleted with known entities from ChEBI. Where a known chemical is entered, its molecular mass is autopopulated from ChEBI. Alternatively a custom compound name can be entered, and its molecular mass (if needed) entered manually.
+
+If the desired concentration is mass- or molarity-based, the user can select whether to weigh out the compound (mass units) or to measure out a volume of stock solution (with a mass- or molarity-based stock concentration). If the desired concentration is volumetric, a volume of stock solution (which can be 100\% (v/v)) is required.
+
+In either case, the user enters the units of mass or volume to weigh out, and Mixology automatically calculates a number of this unit required to make up the final concentration.
+
+
+\section*{Design}
+
+Mixology is developed in Vue JS.
+
+
+
+
+
+
+
+
+
+
+\section*{Bibliography}
+\bibliography{zHenriquesLab-Mendeley}
+
+%% You can use these special %TC: tags to ignore certain parts of the text.
+%TC:ignore
+%the command above ignores this section for word count
+\onecolumn
+\newpage
+
+\section*{Word Counts}
+This section is \textit{not} included in the word count. 
+\subsection*{Notes on Nature Methods Brief Communication}
+\begin{itemize}
+\item Abstract: 3 sentences, 70 words.
+\item Main text: 3 pages, 2 figures, 1000-1500 words, more figures possible if under 3 pages
+\end{itemize}
+
+\subsection*{Statistics on word count}
+\detailtexcount
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Supplementary Information %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\captionsetup*{format=largeformat}
+\section{Something about something} \label{note:Note1} 
+\Blindtext
+
+%TC:endignore
+%the command above ignores this section for word count
+
+\end{document}
