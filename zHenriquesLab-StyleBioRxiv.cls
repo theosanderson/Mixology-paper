@@ -42,7 +42,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Henriques lab dependencies - Start %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\RequirePackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 \RequirePackage{authblk}
 \RequirePackage[latin1,utf8]{inputenc}
 \RequirePackage[english]{babel}
@@ -77,7 +77,9 @@
 \DeclareUnicodeCharacter{00B0}{\degree}
 
 %% Hyperlinking
-\RequirePackage[colorlinks=true, allcolors=blue]{hyperref}
+
+
+\RequirePackage[colorlinks=true, allcolors=RoyalBlue]{hyperref}
 
 %% Ref to Sup
 \RequirePackage{nameref}
